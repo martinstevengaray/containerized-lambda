@@ -1,3 +1,17 @@
 .DS_Store
+.vscode/
 .idea/
 .claude/settings.local.json
+
+# Gradle / Java build output
+.gradle/
+build/
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+override.tf
+override.tf.json
