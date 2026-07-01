@@ -4,8 +4,9 @@
 FROM gradle:8-jdk21 AS build
 WORKDIR /app
 COPY settings.gradle build.gradle ./
+RUN --mount=type=cache,target=/root/.gradle gradle --no-daemon dependencies
 COPY src ./src
-RUN gradle --no-daemon clean build
+RUN --mount=type=cache,target=/root/.gradle gradle --no-daemon clean build
 
 # ---- Lambda Web Adapter binary ----
 FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 AS adapter
@@ -17,7 +18,7 @@ FROM amazoncorretto:21
 COPY --from=adapter /lambda-adapter /opt/extensions/lambda-adapter
 ENV PORT=8080
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar /app/app.jar
 COPY --from=build /app/build/dependency/ /app/lib/
+COPY --from=build /app/build/libs/*.jar /app/app.jar
 # Our own entrypoint: just run the web server. Nothing Lambda-specific here.
 CMD ["java", "-jar", "/app/app.jar"]
