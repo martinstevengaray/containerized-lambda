@@ -29,7 +29,7 @@ public class Server {
     public static void main(String[] args) throws IOException {
         int port = Integer.parseInt(System.getenv().getOrDefault("PORT", "8080"));
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", com.mgaray.server.Server::handle);
+        server.createContext("/", Server::handle);
         server.setExecutor(Executors.newFixedThreadPool(8));
         server.start();
         System.out.println("echo server listening on port " + port);
