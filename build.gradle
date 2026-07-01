@@ -24,7 +24,7 @@ dependencies {
 // Stage runtime dependencies next to the jar so `java -jar app.jar` can find them via Class-Path.
 tasks.register('copyDeps', Copy) {
     from configurations.runtimeClasspath
-    into "$buildDir/dependency"
+    into layout.buildDirectory.dir("dependency")
 }
 
 jar {

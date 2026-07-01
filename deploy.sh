@@ -21,6 +21,9 @@ IMAGE_URI="${REGISTRY}/${REPO}:${TAG}"
 
 echo "Deploying image: ${IMAGE_URI}"
 
+# ---- 0. initialize Terraform (idempotent; makes fresh clones / CI runners work) ----
+terraform -chdir=infra init -input=false
+
 # ---- 1. ensure the ECR repo exists (still Terraform-managed) ----
 terraform -chdir=infra apply \
   -target=aws_ecr_repository.containerized_lambda_ecr_repository \

@@ -6,10 +6,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 3.2"
-    }
   }
 
   backend "s3" {
@@ -23,4 +19,11 @@ terraform {
 
 provider "aws" {
   region = var.region
+
+  # Applied to every taggable resource in this config (ECR repo, IAM role, Lambda, ...).
+  default_tags {
+    tags = {
+      Project = "containerized-lambda-project"
+    }
+  }
 }
