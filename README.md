@@ -12,7 +12,7 @@ Lambda handler model doesn't expose (response streaming, arbitrary HTTP routing,
 
 | Path | Purpose |
 | --- | --- |
-| `src/main/java/com/example/echo/EchoServer.java` | `main()` HTTP echo server — `com.sun.net.httpserver` + Jackson, no AWS deps |
+| `src/main/java/com/mgaray/server/Server.java` | `main()` HTTP echo server — `com.sun.net.httpserver` + Jackson, no AWS deps |
 | `build.gradle`, `settings.gradle` | Gradle build; runnable jar + `copyDeps` stages dependency jars |
 | `Dockerfile` | Multi-stage: Gradle build → Lambda Web Adapter → `amazoncorretto:21` runtime |
 | `infra/` | Terraform: ECR repo, image build/push, IAM role, Lambda, Function URL |
