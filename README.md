@@ -11,7 +11,7 @@ Lambda handler model doesn't expose (response streaming, arbitrary HTTP routing,
 
 
 # requirements
-java gradle docker
+java gradle docker terraform
 
 
 
@@ -48,7 +48,10 @@ curl -s -X POST 'http://localhost:8080/submit' \
 -d 'name=alice&greeting=hello'
 ```
 
+# Staging to aws
 
+optional pre-step: [Create secure bucket](infra/bootstrap/README.md) for tf state if it does not yet exist. 
+update <ACCOUNT_ID> in [infra/versions.tf](infra/versions.tf)
 
 
 
