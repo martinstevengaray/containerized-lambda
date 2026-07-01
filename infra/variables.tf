@@ -1,13 +1,13 @@
 variable "region" {
-  description = "AWS region to deploy into."
+  description = "AWS region to deploy into. Passed in by deploy.sh / CI (the single source of truth), not defaulted here."
   type        = string
-  default     = "us-west-2"
+  nullable    = false
 }
 
 variable "function_name" {
-  description = "Name of the Lambda function (and ECR repository)."
+  description = "Name of the Lambda function (and ECR repository). Passed in by deploy.sh / CI (the single source of truth), not defaulted here."
   type        = string
-  default     = "containerized-lambda"
+  nullable    = false
 }
 
 variable "architecture" {
@@ -31,4 +31,10 @@ variable "timeout" {
   description = "Lambda timeout (seconds)."
   type        = number
   default     = 15
+}
+
+variable "image_uri" {
+  description = "Full ECR image URI (repo:tag) to deploy. Built and pushed by deploy.sh / CI, then passed in at apply time — Terraform does not build the image."
+  type        = string
+  nullable    = false
 }

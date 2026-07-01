@@ -10,5 +10,5 @@ output "ecr_repository_url" {
 
 output "image_uri" {
   description = "Image URI (tag) deployed to the Lambda."
-  value       = local.image_uri
+  value       = var.image_uri
 }

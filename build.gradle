@@ -2,6 +2,9 @@ plugins {
     id 'java'
 }
 
+// Single source of truth for the app version. Emitted via `printVersion` for tooling (Terraform/CI).
+version = '1.0.0-SNAPSHOT'
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -35,4 +38,12 @@ jar {
 
 tasks.named('build') {
     dependsOn 'copyDeps'
+}
+
+// Emit just the version so tooling (deploy.sh / CI) can read it without parsing this file.
+// Usage: ./gradlew -q printVersion
+tasks.register('printVersion') {
+    doLast {
+        println project.version
+    }
 }
