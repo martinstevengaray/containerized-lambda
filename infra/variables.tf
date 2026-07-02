@@ -36,7 +36,7 @@ variable "timeout" {
 variable "reserved_concurrent_executions" {
   description = "Maximum number of concurrent Lambda invocations. -1 removes the limit."
   type        = number
-  default     = 1
+  default     = -1
 }
 
 variable "image_uri" {
