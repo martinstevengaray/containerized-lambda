@@ -33,6 +33,12 @@ variable "timeout" {
   default     = 15
 }
 
+variable "reserved_concurrent_executions" {
+  description = "Maximum number of concurrent Lambda invocations. -1 removes the limit."
+  type        = number
+  default     = 1
+}
+
 variable "image_uri" {
   description = "Full ECR image URI (repo:tag) to deploy. Built and pushed by deploy.sh / CI, then passed in at apply time — Terraform does not build the image."
   type        = string

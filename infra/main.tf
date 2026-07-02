@@ -32,15 +32,15 @@ resource "aws_iam_role_policy_attachment" "basic" {
 
 # ---- Lambda (container image) ----
 resource "aws_lambda_function" "containerized_lambda_function" {
-  function_name = var.function_name
-  role          = aws_iam_role.lambda.arn
-  package_type  = "Image"
-  image_uri     = var.image_uri
-  architectures = [var.architecture]
-  memory_size   = var.memory_size
-  timeout       = var.timeout
-
-  depends_on = [aws_iam_role_policy_attachment.basic]
+  function_name                  = var.function_name
+  role                           = aws_iam_role.lambda.arn
+  package_type                   = "Image"
+  image_uri                      = var.image_uri
+  architectures                  = [var.architecture]
+  memory_size                    = var.memory_size
+  timeout                        = var.timeout
+  reserved_concurrent_executions = var.reserved_concurrent_executions
+  depends_on                     = [aws_iam_role_policy_attachment.basic]
 }
 
 # ---- Public Function URL ----
